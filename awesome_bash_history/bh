@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Path to the python script
+python_script="/home/kalyan/scripts/bash_hist.py"
+
+# Check if the script file exists
+if [ ! -e "$python_script" ]; then
+    echo "Error: $python_script not found."
+    exit 1
+fi
+
+# Function to display usage information
+usage() {
+    echo "Usage: $0 [OPTIONS] [PATH]"
+    echo "Options:"
+    echo "  -d, --show_dups   Show duplicate entries"
+    echo "  -c, --filter_path Filter by the specified path"
+    echo "  PATH              Filter by the specified path (overrides -c)"
+    exit 1
+}
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -d|--show_dups)
+            show_dups="--show_dups True"
+            shift
+            ;;
+        -c|--filter_path)
+            filter_path="--filter_path $(pwd)"
+            shift
+            ;;
+        -*)
+            echo "Error: Unknown option: $1"
+            usage
+            ;;
+        *)
+            custom_path="--filter_path $1"
+            shift
+            ;;
+    esac
+done
+
+# Construct the final command
+command="/home/kalyan/anaconda3/bin/python $python_script $show_dups $filter_path $custom_path"
+
+# Execute the command
+echo "Executing: $command"
+eval "$command" | less +G  -R
+
