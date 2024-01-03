@@ -137,7 +137,7 @@ def main():
     # Sort files chronologically based on the date in the filename
     matching_files.sort(key=lambda x: datetime.strptime(pattern.match(x).group(1), "%Y%m%d"))
     matching_files = list(map(lambda x: os.path.join(history_directory, x), matching_files))
-    matching_files.append('/home/kalyan/.my_bash_hist')
+    matching_files.append('~/.my_bash_hist')
     print(matching_files)
 
     for file_path in matching_files:
