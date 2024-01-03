@@ -25,11 +25,11 @@ wget https://raw.githubusercontent.com/kalyan0510/ScriptDump/main/awesome_bash_h
 wget https://raw.githubusercontent.com/kalyan0510/ScriptDump/main/awesome_bash_history/bh
 
 ```
-4. Mkdir ~/.history
+3. Mkdir ~/.history
 ```
 mkdir ~/.history
 ```
-5. Add a cron job to move the history files to ~/.history
+4. Add a cron job to move the history files to ~/.history
 ```bash
 0 0 * * 0 ~/scripts/move_bash_history.sh
 ```
