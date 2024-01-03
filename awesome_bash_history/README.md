@@ -1,4 +1,5 @@
  ## Awesome Bash History
+![image](https://github.com/kalyan0510/ScriptDump/assets/14043633/1b147797-085a-4a05-9a27-185ab73d4b84)
 
 ### Features: 
 - remains on disk forever 
@@ -45,6 +46,3 @@ Options:
 
 ### Authors
 Me and GPT3.5
-
-Some screenshots:
-![image](https://github.com/kalyan0510/ScriptDump/assets/14043633/1b147797-085a-4a05-9a27-185ab73d4b84)
