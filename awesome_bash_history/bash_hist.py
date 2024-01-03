@@ -4,6 +4,7 @@ import os
 import re
 from datetime import datetime
 import hashlib
+from pathlib import Path
 
 
 class bcolors:
@@ -64,7 +65,7 @@ def printt(sts, rt, pt, cm):
     print(f"{bcolors.OKCYAN}{sts} ({rt}){bcolors.ENDC} - {clr}{pt}{bcolors.ENDC}: {cm}")
 
 
-def parse_log_and_format(content, filter_path=None, no_dup=False):
+def parse_log_and_format(content, filter_path=None, no_dup=False, recursively=True):
     # Define the pattern to match each log line
     pattern = re.compile(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) - (.*?): (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (.*)")
 
@@ -86,7 +87,7 @@ def parse_log_and_format(content, filter_path=None, no_dup=False):
         if match:
             if len(cmds) > 0:
                 sts, rt, pt, cm = cmds.pop(0)
-                if not (filter_path and filter_path != pt or no_dup and prev_print_cm==cm):
+                if not (filter_path and (not (recursively and pt.startswith(filter_path) or pt==filter_path))) and  not(no_dup and prev_print_cm==cm):
                     printt(sts, rt, pt, cm)
                     prev_print_cm = cm
             start_time_str, path, command_time_str, command = match.groups()
@@ -117,16 +118,18 @@ def parse_log_and_format(content, filter_path=None, no_dup=False):
         #     continue
     while cmds:
         sts, rt, pt, cm = cmds.pop(0)
-        if filter_path and filter_path != pt:
-            continue
-        printt(sts, rt, pt, cm)
-
+        if not (filter_path and (not (recursively and pt.startswith(filter_path) or pt == filter_path))) and not (
+                no_dup and prev_print_cm == cm):
+            # continue
+            printt(sts, rt, pt, cm)
+    print()
 
 def main():
     parser = argparse.ArgumentParser(description='Parse and format bash history.')
-    # parser.add_argument('history_file', type=str, help='Path to bash history file', default='/home/kalyan/.my_bash_hist')
     parser.add_argument('--filter_path', type=str, default=None, help='Filter output by path')
-    parser.add_argument('--show_dups', type=bool, default=False, help='Show dups')
+    parser.add_argument('--show_dups', action='store_true', help='Show duplicates')
+
+    parser.add_argument('--no_recursion', action='store_true', help='Filter recursively')
     args = parser.parse_args()
     history_directory = os.path.expanduser("~/.history/")
     pattern = re.compile(r"bh_(\d{8})")
@@ -137,14 +140,15 @@ def main():
     # Sort files chronologically based on the date in the filename
     matching_files.sort(key=lambda x: datetime.strptime(pattern.match(x).group(1), "%Y%m%d"))
     matching_files = list(map(lambda x: os.path.join(history_directory, x), matching_files))
-    matching_files.append('~/.my_bash_hist')
+    matching_files.append(Path("~/.my_bash_hist").expanduser())
     print(matching_files)
 
     for file_path in matching_files:
         with open(file_path, 'r') as file:
             lines = file.readlines()
-    # print(args.filter_path)
-        parse_log_and_format("".join(lines), args.filter_path, no_dup=not args.show_dups)
+        print(f'From "{file_path}"')
+        parse_log_and_format("".join(lines), args.filter_path, no_dup=not args.show_dups, recursively=not args.no_recursion)
         # print(out)
+    print(args.no_recursion)
 if __name__ == "__main__":
     main()

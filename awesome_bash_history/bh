@@ -14,6 +14,7 @@ usage() {
     echo "Usage: $0 [OPTIONS] [PATH]"
     echo "Options:"
     echo "  -d, --show_dups   Show duplicate entries"
+    echo "  -i, --ignore_recursion   Do not filter recursively "
     echo "  -c, --filter_path Filter by the specified path"
     echo "  PATH              Filter by the specified path (overrides -c)"
     exit 1
@@ -23,9 +24,13 @@ usage() {
 while [[ $# -gt 0 ]]; do
     case $1 in
         -d|--show_dups)
-            show_dups="--show_dups True"
+            show_dups="--show_dups "
             shift
             ;;
+        -i|--ignore_recursion)
+            no_rec="--no_recursion "
+	    shift
+   	    ;;
         -c|--filter_path)
             filter_path="--filter_path $(pwd)"
             shift
@@ -42,7 +47,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Construct the final command
-command="python $python_script $show_dups $filter_path $custom_path"
+command="$HOME/anaconda3/bin/python $python_script $no_rec $show_dups $filter_path $custom_path"
 
 # Execute the command
 echo "Executing: $command"
