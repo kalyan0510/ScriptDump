@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to the python script
-python_script="/home/kalyan/scripts/bash_hist.py"
+python_script="$HOME/scripts/bash_hist.py"
 
 # Check if the script file exists
 if [ ! -e "$python_script" ]; then
@@ -42,7 +42,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Construct the final command
-command="/home/kalyan/anaconda3/bin/python $python_script $show_dups $filter_path $custom_path"
+command="python $python_script $show_dups $filter_path $custom_path"
 
 # Execute the command
 echo "Executing: $command"
