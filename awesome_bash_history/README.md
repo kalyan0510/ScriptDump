@@ -16,8 +16,16 @@
   alias bhc='~/scripts/bh -c'
 ```
 2. Copy above 3 files to ~/scripts
-3. Mkdir ~/.history
-4. Add a cron job to move the history files to ~/.history
+```
+mkdir ~/scripts
+cd ~/scripts
+
+```
+4. Mkdir ~/.history
+```
+mkdir ~/.history
+```
+5. Add a cron job to move the history files to ~/.history
 ```bash
 0 0 * * 0 ~/scripts/move_bash_history.sh
 ```
