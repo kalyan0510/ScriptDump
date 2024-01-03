@@ -19,6 +19,9 @@
 ```
 mkdir ~/scripts
 cd ~/scripts
+wget https://raw.githubusercontent.com/kalyan0510/ScriptDump/main/awesome_bash_history/bash_hist.py
+wget https://raw.githubusercontent.com/kalyan0510/ScriptDump/main/awesome_bash_history/move_bash_history.sh
+wget https://raw.githubusercontent.com/kalyan0510/ScriptDump/main/awesome_bash_history/bh
 
 ```
 4. Mkdir ~/.history
