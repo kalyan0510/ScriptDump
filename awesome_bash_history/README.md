@@ -2,8 +2,9 @@
 ![image](https://github.com/kalyan0510/ScriptDump/assets/14043633/1b147797-085a-4a05-9a27-185ab73d4b84)
 
 ### Features: 
-- remains on disk forever 
+- history of commands remains on disk forever 
 - **working directory** of the command is also stored
+- also add the time, & period of execution 
 - browse history of any given directory
 - colorized history for easy reading
 
