@@ -39,9 +39,10 @@ mkdir ~/.history
 ```
 Usage: bh [OPTIONS] [PATH]
 Options:
-  -d     Show duplicate entries
-  -c     Filter history by the current working dir
-  PATH   Filter history by the specified path (overrides -c)
+  -d, --show_dups   Show duplicate entries
+  -i, --ignore_recursion   Do not filter recursively
+  -c, --filter_path Filter by the specified path
+  PATH              Filter by the specified path (overrides -c)
 ```
 
 ### Authors
