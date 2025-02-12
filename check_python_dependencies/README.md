@@ -1,4 +1,6 @@
+
 # Check Installed Python Packages
+(file written by GPT https://chatgpt.com/share/67acddda-7280-8003-89db-389efdebf335)
 
 ### sample output
 ![image](https://github.com/user-attachments/assets/7af07c30-3ad5-48e8-8661-937fb41bb1c9)
@@ -33,4 +35,3 @@ Then, apply the changes:
 
 
 
-(file written by GPT)
