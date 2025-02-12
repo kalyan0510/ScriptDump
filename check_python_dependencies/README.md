@@ -1,5 +1,8 @@
 # Check Installed Python Packages
 
+### sample output
+![image](https://github.com/user-attachments/assets/7af07c30-3ad5-48e8-8661-937fb41bb1c9)
+
 ## Overview
 `check_req` is a script to verify installed Python packages against the `requirements.txt` file. It categorizes packages into:
 - Installed with a newer version than required
