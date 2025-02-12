@@ -28,4 +28,6 @@ Then, apply the changes:
    source ~/.bashrc  # or source ~/.zshrc
    ```
 
-(written by GPT)
+
+
+(file written by GPT)
