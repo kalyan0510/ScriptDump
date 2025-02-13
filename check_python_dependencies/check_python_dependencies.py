@@ -6,7 +6,7 @@ def check_installed_versions(requirements_file):
     with open(requirements_file, 'r') as f:
         requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
 
-    installed_packages = {pkg.key: pkg.version for pkg in pkg_resources.working_set}
+    installed_packages = {pkg.key.lower().replace('_','-'): pkg.version for pkg in pkg_resources.working_set}
 
     categorized_packages = {
         "INSTALLED IS LATEST THAN REQUIRED": [],
@@ -17,6 +17,8 @@ def check_installed_versions(requirements_file):
 
     for req in requirements:
         package, required_version = (req.split('==') + [None])[:2]
+        package = package.split('[')[0]
+        package=package.lower().replace('_', '-')
         installed_version = installed_packages.get(package, None)
 
         if installed_version is None:
